@@ -134,7 +134,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<Leader>,", "<Cmd>Telescope buffers<CR>", { desc = "switch to buffer" })
 			vim.keymap.set("n", [[<Leader>']], "<Cmd>Telescope resume<CR>", { desc = "resume previous search" })
 			vim.keymap.set("n", [[<Leader>sp]], "<Cmd>Telescope live_grep_args<CR>", { desc = "ripgrep" })
-			vim.keymap.set("n", "<Leader>gg", "<Cmd>0Git<CR>", { desc = "fugitive" })
+			vim.keymap.set("n", "<Leader>gg", "<Cmd>Neogit<CR>", { desc = "Neogit" })
 			vim.keymap.set("n", "<Leader>hh", "<Cmd>Telescope help_tags<CR>", { desc = "help" })
 		end,
 		config = function()
@@ -283,6 +283,14 @@ require("lazy").setup({
 		end,
 	},
 	"https://github.com/moll/vim-bbye",
+	{
+	    'numToStr/Comment.nvim',
+	    opts = {
+		-- add any options here
+	    }
+	},
+	'JoosepAlviste/nvim-ts-context-commentstring',
+
 	
 	{ 'projekt0n/github-nvim-theme', name = 'github-theme' }
 		
@@ -310,7 +318,7 @@ vim.keymap.set('t', '<C-SPACE>', "<C-\\><C-n><C-w>k<C-w>l",{silent = true})
 
 vim.cmd('Neotree')
 
-vim.cmd('colorscheme duskfox')
+vim.cmd('colorscheme dawnfox')
 -- vim.cmd('colorscheme github_light_high_contrast')
 vim.cmd('cd ~')
 
@@ -380,13 +388,13 @@ if vim.g.neovide then
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 60
 
-	vim.g.neovide_cursor_vfx_mode = "railgun"
-	vim.g.neovide_cursor_vfx_particle_lifetime = 1.5
+	vim.g.neovide_cursor_vfx_mode = "pixiedust"
+	vim.g.neovide_cursor_vfx_particle_lifetime = 1
 	vim.g.neovide_cursor_vfx_particle_density = 17.0
 	vim.g.neovide_cursor_vfx_particle_phase = 4.5
 	vim.g.neovide_cursor_vfx_particle_curl = 4.0
 
-	vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
-	vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+	vim.keymap.set({ "n", "v" }, "<leader>+", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+	vim.keymap.set({ "n", "v" }, "<leader>-", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
 	vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
 end
