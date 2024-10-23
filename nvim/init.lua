@@ -313,6 +313,8 @@ vim.keymap.set('n', '<C-t>', '<Cmd>ToggleTerm<CR>')
 vim.keymap.set('n', '<C-;>d', '<Cmd>colorscheme dawnfox<CR>')
 vim.keymap.set('n', '<C-;>n', '<Cmd>colorscheme duskfox<CR>')
 vim.keymap.set('n', '<leader>x', '<Cmd>Bdelete<CR>')
+vim.keymap.set('n', '<leader>~', '<Cmd>cd ~<CR>')
+
 
 -- Copy to clipboard
 vim.api.nvim_set_keymap('n', '<leader>cc', '"+y', { noremap = true, silent = true })
