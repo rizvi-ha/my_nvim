@@ -128,7 +128,7 @@ require("lazy").setup({
 		"https://github.com/nvim-telescope/telescope.nvim",
 		lazy = false,
 		init = function()
-			vim.keymap.set("n", "<Leader>ff", "<Cmd>Telescope find_files<CR>", { desc = "find file" })
+			vim.keymap.set("n", "<Leader>ff", "<Cmd>Telescope find_files cwd=/home/rizvi/<CR>", { desc = "find file" })
 			vim.keymap.set("n", "<Leader>fr", "<Cmd>Recent<CR>", { desc = "find frecent file" })
 			vim.keymap.set("n", "<Leader>fo", "<Cmd>Telescope oldfiles<CR>", { desc = "find recent file" })
 			vim.keymap.set("n", "<Leader>,", "<Cmd>Telescope buffers<CR>", { desc = "switch to buffer" })
@@ -313,6 +313,11 @@ vim.keymap.set('n', '<C-t>', '<Cmd>ToggleTerm<CR>')
 vim.keymap.set('n', '<C-;>d', '<Cmd>colorscheme dawnfox<CR>')
 vim.keymap.set('n', '<C-;>n', '<Cmd>colorscheme duskfox<CR>')
 vim.keymap.set('n', '<leader>x', '<Cmd>Bdelete<CR>')
+
+-- Copy to clipboard
+vim.api.nvim_set_keymap('n', '<leader>cc', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>cc', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pp', '"+p', { noremap = true, silent = true })
 
 vim.keymap.set('t', '<C-SPACE>', "<C-\\><C-n><C-w>k<C-w>l",{silent = true})
 
