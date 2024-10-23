@@ -290,7 +290,66 @@ require("lazy").setup({
 	    }
 	},
 	'JoosepAlviste/nvim-ts-context-commentstring',
+	'https://github.com/hrsh7th/vim-vsnip',
+	'https://github.com/hrsh7th/vim-vsnip-integ',
+	'https://github.com/github/copilot.vim',
+	"rcarriga/nvim-notify",
+	{
+	    "kawre/leetcode.nvim",
+	    build = ":TSUpdate html",
+	    dependencies = {
+		"nvim-telescope/telescope.nvim",
+		"nvim-lua/plenary.nvim", -- required by telescope
+		"MunifTanjim/nui.nvim",
 
+		-- optional
+		"nvim-treesitter/nvim-treesitter",
+		"rcarriga/nvim-notify",
+		"nvim-tree/nvim-web-devicons",
+	    },
+	    opts = {
+		    lang = "python3",
+		    }
+	},
+	
+	{
+		'goolord/alpha-nvim',
+		config = function()
+		    local alpha = require('alpha')
+		    local dashboard = require('alpha.themes.dashboard')
+
+		    -- Set a header (you can customize this ASCII art or message)
+		    dashboard.section.header.val = {
+"       _                        ",
+"       \\`*-.                    ",
+"        )  _`-.                 ",
+"       .  : `. .                ",
+"       : _   '  \\               ",
+"       ; *` _.   `*-._          ",
+"       `-.-'          `-.       ",
+"         ;       `       `.     ",
+"         :.       .        \\    ",
+"         . \\  .   :   .-'   .   ",
+"         '  `+.;  ;  '      :   ",
+"         :  '  |    ;       ;-. ",
+"         ; '   : :`-:     _.`* ;",
+"[bug] .*' /  .*' ; .*`- +'  `*' ",
+"      `*-*   `*-*  `*-*'        ",
+		    }
+		    -- Set menu
+		    dashboard.section.buttons.val = {
+			dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
+			dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
+			dashboard.button("q", "  Quit", ":qa<CR>"),
+		    }
+			
+		    -- Set footer (you can customize it)
+		    dashboard.section.footer.val = "~ ~ meow ~ ~"
+
+		    -- Setup alpha with the configured dashboard
+		    alpha.setup(dashboard.config)
+		end
+	},
 	
 	{ 'projekt0n/github-nvim-theme', name = 'github-theme' }
 		
@@ -323,16 +382,19 @@ vim.api.nvim_set_keymap('n', '<leader>pp', '"+p', { noremap = true, silent = tru
 
 vim.keymap.set('t', '<C-SPACE>', "<C-\\><C-n><C-w>k<C-w>l",{silent = true})
 
-vim.cmd('Neotree')
+local function set_colorscheme()
+    local hour = os.date("*t").hour
+    if hour >= 7 and hour < 19 then
+        -- Daytime: set colorscheme A
+        vim.cmd("colorscheme dawnfox")
+    else
+        -- Nighttime: set colorscheme B
+        vim.cmd("colorscheme duskfox")
+    end
+end
 
-vim.cmd('colorscheme dawnfox')
--- vim.cmd('colorscheme github_light_high_contrast')
+set_colorscheme()
 vim.cmd('cd ~')
-
--- aesthetics
-
-vim.opt.number = true
-vim.opt.signcolumn = "number"
 
 -- LSP stuff below
 
