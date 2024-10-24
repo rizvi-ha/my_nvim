@@ -318,8 +318,13 @@ require("lazy").setup({
 		    local alpha = require('alpha')
 		    local dashboard = require('alpha.themes.dashboard')
 
-		    -- Set a header (you can customize this ASCII art or message)
+--		    Set a header (you can customize this ASCII art or message)
 		    dashboard.section.header.val = {
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
 "       _                        ",
 "       \\`*-.                    ",
 "        )  _`-.                 ",
@@ -333,10 +338,38 @@ require("lazy").setup({
 "         '  `+.;  ;  '      :   ",
 "         :  '  |    ;       ;-. ",
 "         ; '   : :`-:     _.`* ;",
-"[bug] .*' /  .*' ; .*`- +'  `*' ",
+"      .*' /  .*' ; .*`- +'  `*' ",
 "      `*-*   `*-*  `*-*'        ",
-		    }
-		    -- Set menu
+}
+			
+-- 		    dashboard.section.header.val = {
+-- "                               ",
+-- "			       ",
+-- "			       ",
+-- "			       ",
+-- "			       ",
+-- "                               ",
+-- "               ***       ***   ",
+-- "               * ********  *   ",
+-- "               *           *   ",
+-- "              **  **   **  *   ",
+-- "              **           *   ",
+-- "              **           *   ",
+-- "              **           *   ",
+-- "             **            *   ",
+-- "           **              *   ",
+-- "           *               *   ",
+-- "  ****    **     *        **   ",
+-- " **  *    *      **   *   **   ",
+-- "**  **   **      **   *   **   ",
+-- " **  ******       **  *  **    ",
+-- "  **               *  *  *     ",
+-- "   *************** ** *  *     ",
+-- "                               ",
+-- 		    }
+			
+
+		    dashboard.section.header.opts.hl = "AlphaHeader"
 		    dashboard.section.buttons.val = {
 			dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
 			dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
@@ -344,8 +377,10 @@ require("lazy").setup({
 		    }
 			
 		    -- Set footer (you can customize it)
-		    dashboard.section.footer.val = "~ ~ meow ~ ~"
 
+		    dashboard.section.footer.val = {
+			"rizvi-ha"
+		    } 
 		    -- Setup alpha with the configured dashboard
 		    alpha.setup(dashboard.config)
 		end
@@ -361,6 +396,21 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "AlphaReady",
+  callback = function()
+    vim.opt.linespace = 0  -- low line spacing for alpha page
+  end,
+})
+
+-- Restore higher line spacing when opening a file
+vim.api.nvim_create_autocmd("User", {
+  pattern = "AlphaClosed",
+  callback = function()
+      vim.opt.linespace = 4  -- higher line spacing for regular files
+    end,
+})
+
 -- Keybinds
 
 vim.g.mapleader = ","
@@ -369,8 +419,8 @@ vim.keymap.set('n', '<C-b>', '<Cmd>Neotree toggle<CR>')
 
 vim.keymap.set('n', '<C-t>', '<Cmd>ToggleTerm<CR>')
 
-vim.keymap.set('n', '<C-;>d', '<Cmd>colorscheme dawnfox<CR>')
-vim.keymap.set('n', '<C-;>n', '<Cmd>colorscheme duskfox<CR>')
+vim.keymap.set('n', '<C-;>d', '<Cmd>colorscheme dawnfox<CR><Cmd>highlight AlphaHeader guifg=#FF5733<CR>')
+vim.keymap.set('n', '<C-;>n', '<Cmd>colorscheme duskfox<CR><Cmd>highlight AlphaHeader guifg=#FF5733<CR>')
 vim.keymap.set('n', '<leader>x', '<Cmd>Bdelete<CR>')
 vim.keymap.set('n', '<leader>~', '<Cmd>cd ~<CR>')
 
@@ -395,6 +445,7 @@ end
 
 set_colorscheme()
 vim.cmd('cd ~')
+vim.cmd([[ highlight AlphaHeader guifg=#FF5733 ]])
 
 -- LSP stuff below
 
@@ -449,16 +500,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 if vim.g.neovide then
 	vim.g.neovide_input_macos_alt_is_meta = true
-	vim.opt.linespace = 5
-	-- vim.opt.guifont = { "JetBrains Mono", "JetBrainsMono Nerd Font", ":h18" }
+	vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", "JetBrainsMono Nerd Font", ":h13" }
 
 	vim.g.neovide_floating_shadow = true
 	vim.g.neovide_floating_z_height = 5
 	vim.g.neovide_light_angle_degrees = 45
 	vim.g.neovide_light_radius = 60
 
-	vim.g.neovide_cursor_vfx_mode = "pixiedust"
-	vim.g.neovide_cursor_vfx_particle_lifetime = 1
+	vim.g.neovide_cursor_vfx_mode = "railgun"
+	vim.g.neovide_cursor_vfx_particle_lifetime = 0.3
 	vim.g.neovide_cursor_vfx_particle_density = 17.0
 	vim.g.neovide_cursor_vfx_particle_phase = 4.5
 	vim.g.neovide_cursor_vfx_particle_curl = 4.0
